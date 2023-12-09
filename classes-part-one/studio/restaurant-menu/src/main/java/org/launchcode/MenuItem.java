@@ -1,6 +1,7 @@
 package org.launchcode;
 import org.w3c.dom.ls.LSOutput;
 
+import java.util.Date;
 import java.util.HashMap;
 
 //import java.util.Scanner;
@@ -9,40 +10,49 @@ public class MenuItem {
     private Double price;
     private String description;
     private String category;
-
-    public MenuItem(Double price, String description, String category)
+    boolean isNew;
+    Date itemDate = new Date();
+    int year = itemDate.getYear() + 1900;
+    int month = itemDate.getMonth() + 1;
+    int day = itemDate.getDate();
+    public String itemTime()
     {
+        return(month + "/" + day + "/" + year);
+    }
+    public MenuItem(boolean isNew,Double price, String description, String category)
+    {
+        this.isNew = isNew;
         this.price = price;
         this.description = description;
         this.category = category;
     }
 
-    void setPrice(Double aPrice)
+    public void setPrice(Double aPrice)
     {
         price = aPrice;
     }
 
-    void setDescription(String aDescription)
+    public void setDescription(String aDescription)
     {
         description = aDescription;
     }
 
-   void setCategory (String aCategory)
+   public void setCategory (String aCategory)
    {
        category = aCategory;
    }
 
-    Double getPrice()
+    public Double getPrice()
     {
         return price;
     }
 
-    String getDescription()
+    public String getDescription()
     {
         return description;
     }
 
-    String getCategory()
+   public String getCategory()
     {
         return category;
     }

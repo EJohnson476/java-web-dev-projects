@@ -2,80 +2,97 @@ package org.launchcode;
 
 //import org.w3c.dom.ls.LSOutput;
 
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Scanner;
 
 import java.util.ArrayList;
 
 public class Menu {
-    public static void printMenu() {
-        Double price = 0.00;
-        String description = "steak";
-        String category = "dinner";
-        ArrayList<Object> theMenu = new ArrayList<>();
 
-        MenuItem item1 = new MenuItem(price,description,category);
-        item1.setPrice(99.99);
-        item1.setDescription("steak");
-        item1.setCategory("dinner");
-        theMenu.add(item1);
-        System.out.println(item1.getPrice());
+    ArrayList<MenuItem> theMenu = new ArrayList<>();
+    int day;
+    int year;
+    int month;
 
-        //To display Menu
-        for(Object item : theMenu)
+    public Menu(ArrayList<MenuItem> theMenu, int year, int month, int day)
+    {
+        this.theMenu = theMenu;
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+    public String getTime()
+    {
+        String time = month + "/" + day + "/" + year ;
+
+        return(time);
+    }
+
+    public void printMenu(ArrayList<MenuItem> menuItems)
+    {
+        for(MenuItem item : menuItems)
         {
-            System.out.println("Try our :" + item.getPrice());
-        }
-
-
-    }
-
-/*
-        //To add to Menu
-        private static void addMenuItem (ArrayList < Object > theMenu) {
-            Scanner input = new Scanner(System.in);
-            MenuItem newItem;
-            String answer;
-            boolean isTrue = true;
-
-
-            System.out.println("Would you like to add an item to the menu? Yes or No ");
-            answer = input.next();
-
-            System.out.println(answer);
-
-            if (answer.equalsIgnoreCase("yes")) {
-
-                do {
-                    Double price = 0.00;
-                    String description = "";
-                    String category = "";
-
-                   MenuItem newItem = new MenuItem(price, description, category);
-
-                    System.out.println("Enter price for new item:");
-                    newItem.setPrice(Double.toString(input.nextDouble()));
-                    System.out.println("Enter description for new item:");
-                    newItem.setDescription(input.next());
-                    System.out.println("Enter category for new item:");
-                    newItem.setCategory(input.next());
-
-                    theMenu.add(newItem);
-
-                    System.out.println("Would you like to add another item?");
-                    answer = input.next();
-
-                    if (answer.equalsIgnoreCase("no")) {
-                        isTrue = false;
-                    }
-                }
-                while (isTrue);
+            int i = 0;
+            if(item.isNew && menuItems.indexOf(item) > menuItems.size() - 5)
+            {
+                System.out.println("This Item is New!");
             }
+            System.out.println("Try our: " + item.getDescription() + " for " + item.getCategory() + " , only " + item.getPrice() + " !\n");
+            i++;
+        }
+    }
+    //To add to Menu
+    public void addMenuItem(ArrayList<MenuItem> theMenu) {
+        Scanner input = new Scanner(System.in);
+        MenuItem newItem;
+        String answer;
+        boolean isTrue = true;
+        boolean isNew = true;
 
-            input.close();
-            //  System.out.println(theMenu);
+        System.out.println("Would you like to add an item to the menu? Yes or No ");
+        answer = input.nextLine();
+        //input.nextLine();
 
+       // System.out.println(answer);
+
+        if (answer.equalsIgnoreCase("yes")) {
+
+            do {
+                Double price = 0.00;
+                String description = "";
+                String category = "";
+
+                newItem = new MenuItem(isNew, price, description, category);
+
+                System.out.println("Enter description for new item:");
+                newItem.setDescription(input.nextLine());
+
+                //input.nextLine();
+
+                System.out.println("Enter price for new item:");
+                newItem.setPrice(input.nextDouble());
+
+                input.nextLine();
+
+                System.out.println("Enter category for new item:");
+                newItem.setCategory(input.nextLine());
+
+                theMenu.add(newItem);
+
+                System.out.println("Would you like to add another item?");
+                answer = input.nextLine();
+                input.nextLine();
+
+                if (answer.equalsIgnoreCase("no")) {
+                    isTrue = false;
+                }
+            }
+            while (isTrue);
         }
 
- */
+        input.close();
+        //return theMenu;
+
     }
+
+}
