@@ -16,7 +16,6 @@ public class Main {
                 add(new MenuItem(false,15.99,"Burger & Fries","Lunch"));
                 add(new MenuItem(false,12.99,"Bacon & Eggs","Breakfast"));
             }
-
         };
         int currentYear = time.getYear() + 1900;
         Menu mainMenu = new Menu(daMenu, currentYear, time.getMonth() + 1 ,time.getDate());
@@ -26,5 +25,10 @@ public class Main {
             System.out.println("The menu was last updated: " + daMenu.get(daMenu.size() - 1).itemTime());
         }
         mainMenu.printMenu(daMenu);
+        mainMenu = new Menu(daMenu, currentYear, time.getMonth() + 1 ,time.getDate());
+        mainMenu.printSingleItem();
+        mainMenu.removeItem();
+        mainMenu.printMenu(daMenu);
+        mainMenu.equalItems();
     }
 }
